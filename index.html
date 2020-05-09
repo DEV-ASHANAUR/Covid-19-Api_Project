@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAN COVID-19</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div id="preloader">
+        <ul>
+            <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+        </ul>
+    </div>
+    <div class="container">
+        <!-- nav bar start -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+           <span class='text-white'>বাংলাদেশ কভিড -১৯ তথ্যে</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li> -->
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="#">Features</a>
+                </li> -->
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="#">Pricing</a>
+                </li> -->
+              </ul>
+              <span class="navbar-text text-white">
+                <a href="img/12.jpg" target="_blank"><img src="img/12.jpg" alt="" style="width: 35px;height: 35px; border-radius: 30%;"></a>
+                মো : আশানূর রহমান
+              </span>
+            </div>
+          </nav>
+        <!-- nav bar end-->
+        <!-- <div id="content">good night</div> -->
+          <div class="row mt-2">
+              <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <span id="date"></span>
+                    </div>
+                </div>
+              </div>
+          </div>
+        <!-- top -->
+        <div class="row mt-4">
+            <div class="col-6 col-md-3">
+                <div class="countCard confirm">
+                    <span>মোট আক্রান্ত</span>
+                    <h3 id="confirmed">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard recoverd">
+                    <span>মোট সুস্থ</span>
+                    <h3 id="recoverd">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard  totaldeath">
+                    <span>মোট মৃত্যু</span>
+                    <h3 id="totaldeath">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard  totaltest">
+                    <span>মোট নমুনা পরিক্ষা</span>
+                    <h3 id="totaltest">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard new">
+                    <span>নতুন আক্রান্ত</span>
+                    <h3 id="new">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard newrecoverd">
+                    <span>নতুন সুস্থ</span>
+                    <h3 id="newrecover">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard newnewdeath">
+                    <span>নতুন মৃত্যু</span>
+                    <!-- <span>NEW DEATH</span> -->
+                    <h3 id="newdeath">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="countCard newtest">
+                    <span>নতুন নমুনা পরিক্ষা</span>
+                    <!-- <span>NEW TEST</span> -->
+                    <h3 id="newtest">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-6 ">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>লিঙ্গ ভিত্তিক আক্রান্ত</span>
+                        <small class="d-none d-sm-block" id="last_upcon"></small>
+                    </div>
+                    <div class="card-body">
+                        <div id="piechart1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>লিঙ্গ ভিত্তিক মৃত্যু </span>
+                        <small class="d-none d-sm-block" id="last_updeath"></small>
+                    </div>
+                    <div class="card-body">
+                        <div id="piechart2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>জেলা ভিত্তিক তথ্য</span>
+                        <small class="d-none d-sm-block" id="dist_last"></small>
+                    </div>
+                    <div class="card-body">
+                        <table id="dristricts" class="table table-striped table-bordered text-center" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>জেলার নাম</th>
+                                    <th>আক্রান্ত</th>
+                                    <th>সুস্থ</th>
+                                    <th>মৃত্যু</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center bg-info text-white p-2">
+            <span>ওয়েবসাইটটি তৈরি করেছেন - <a class="text-white" href="https://facebook.com/ashanaur.rahman.16/" target="_blank">মো : আশানূর রহমান </a></span>
+        </div>
+    </div>
+    <!-- js here -->
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(window).on("load",function(){
+            $("#preloader").fadeOut();
+        });
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChartdetch);
+        function drawChart() {
+          $.ajax({
+                  url:"https://corona.in.com.bd/api/genders",
+                  type:"GET",
+                  dataTpe:"JSON",
+                  success:function(data){
+                      //console.log(data.lastUpdate);
+                      $('#last_upcon').html("Last Update :"+data.lastUpdate);
+                      var data = google.visualization.arrayToDataTable([
+                      ['Genders', 'Persent'],
+                      ['পুরুষ',    parseInt(data.data.male.confirmed)],
+                      ['মহিলা',  parseInt(data.data.female.confirmed)]
+                      ]);
+                      var options = {
+                      title: 'কোভিড-১৯ লিঙ্গ আক্রান্ত শতাংশ',
+                      is3D: true,
+                      slices: {
+                          0: { color: '#004411' },
+                          1: { color: 'green' }
+                          }
+                      };
+                      var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+                      chart.draw(data, options);
+                  }
+              });
+        }
+        function drawChartdetch() {
+          $.ajax({
+                  url:"https://corona.in.com.bd/api/genders",
+                  type:"GET",
+                  dataTpe:"JSON",
+                  success:function(data){
+                      //console.log(data.data.male.deaths);
+                      $('#last_updeath').html("Last Update :"+data.lastUpdate);
+                      var data = google.visualization.arrayToDataTable([
+                      ['Genders', 'Persent'],
+                      ['পুরুষ',    parseInt(data.data.male.deaths)],
+                      ['মহিলা',  parseInt(data.data.female.deaths)]
+                      
+                      ]);
+  
+                      var options = {
+                      title: 'কোভিড-১৯ লিঙ্গ মৃত্যু শতাংশ',
+                      is3D: true
+                      };
+                      var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+                      chart.draw(data, options);
+                  }
+              });
+        }
+        //all conditation
+        function formatNumber(num) {
+                      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+                  }
+        $.ajax({
+          url:"https://corona.in.com.bd/api/stats",
+          type:"GET",
+          dataType:"JSON",
+          success:function(res){
+              //console.log(res.last.tested);lastUpdate
+              $("#date").html(formatNumber("Last Update : "+res.lastUpdate));
+              $("#confirmed").html(formatNumber(res.total.confirmed));
+              $("#recoverd").html(formatNumber(res.total.recovered));
+              $("#totaldeath").html(formatNumber(res.total.deaths));
+              $("#totaltest").html(formatNumber(res.total.tested));
+              $("#new").html(formatNumber(res.last.confirmed));
+              $("#newrecover").html(formatNumber(res.last.recovered));
+              $("#newdeath").html(formatNumber(res.last.deaths));
+              $("#newtest").html(formatNumber(res.last.tested));
+          }
+        });
+        //district wise
+        $.ajax({
+            url:"https://corona.in.com.bd/api/districts",
+            type:"GET",
+            dataType:"JSON",
+            success:function(res){
+                //console.log(res.data);
+                $('#dist_last').html('Last Update : '+res.lastUpdate);
+                $.each(res.data, function(key, val) {
+                    var tr = `
+                    <tr>
+                        
+                        <td>${val.bnname}</td>
+                        <td>${val.confirmed}</td>
+                        <td>${val.recovered}</td>
+                        <td>${val.deaths}</td>
+                    </tr>
+                    `;
+                    $('tbody').append(tr);
+                   
+                });
+                $('#dristricts').DataTable();
+            }
+        });
+      </script>
+</body>
+</html>
