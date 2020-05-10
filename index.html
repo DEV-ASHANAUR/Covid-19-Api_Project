@@ -11,6 +11,12 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </head>
 <body>
     <div id="preloader">
@@ -51,7 +57,7 @@
               <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-center">
-                        <span id="date"></span>
+                        <span id="date"></span><span class="text-success">  SOURCE : IEDCR</span>
                     </div>
                 </div>
               </div>
@@ -141,7 +147,35 @@
                 </div>
             </div>
         </div>
-        
+        <div class="row mt-3">
+            <div class="col-md-6 ">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>বয়স অনুসারে আক্রান্ত অনুপাত</span>
+                        <small class="d-none d-sm-block" id="last_upcon"></small>
+                    </div>
+                    <div class="card-body">
+                        <div id="container2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>মোট পরিসংখ্যান</span>
+                        <small class="d-none d-sm-block" id="last_updeath"></small>
+                    </div>
+                    <div class="card-body">
+                        <div id="dfsre" class="d-flex justify-content-center">
+                            <div class="spinner-grow text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row mt-3">
             <div class="col-md-6 ">
                 <div class="card">
@@ -298,6 +332,74 @@
                 });
                 $('#dristricts').DataTable();
             }
+        });
+        //colunm highcart
+        agedata(); 
+        function agedata(val){
+            Highcharts.chart('container2', { 
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: 'সূত্র: আইডিসিআর'
+                },
+                xAxis: {
+                    categories: [
+                        '0-10',
+                        '11-20',
+                        '21-30',
+                        '31-40',
+                        '41-50',
+                        '51-60',
+                        '60+',
+                        
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:1f} %</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.1,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'বয়স',
+                    data: val
+
+                }]
+            });
+        }       
+        $(document).ready(function(){
+            $.ajax({
+                url:"https://corona.in.com.bd/api/ages",
+                type:"GET",
+                dataType:"JSON",
+                success:function(data){
+                    //console.log(data);
+                    $.each(data,function(key,val){
+                        //console.log(val.eleventotwenty.confirmed);
+                        var value = [val.onetoten.confirmed,val.eleventotwenty.confirmed,val.twentyonetothirty.confirmed,val.thirtyonetofourty.confirmed,val.fourtyonetofifty.confirmed,val.fiftyonetosixty.confirmed,val.sixtyplus.confirmed];
+                        agedata(value)
+                    });
+                }
+            });
         });
       </script>
 </body>
